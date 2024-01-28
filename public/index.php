@@ -48,7 +48,9 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 | and wonderful application we have prepared for them.
 |
 */
-
+/////////////////////////////////////////////////////// mine
+echo "MORANNNN"
+/////////////////////////////////////////////////////// mine
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
