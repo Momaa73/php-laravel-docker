@@ -49,7 +49,7 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 |
 */
 /////////////////////////////////////////////////////// mine
-echo "MORANNNN"
+echo "MORANNNN";
 /////////////////////////////////////////////////////// mine
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
