@@ -26,7 +26,13 @@ if (config('app.env') === 'local') {
 try {
     // Example: Fetch and display data from the database using the Test model
     $data = Test::all();
-    dd($data); // Dump and die to inspect the data (for development purposes)
+
+    // Iterate through the collection and display the data
+    echo "<h2>Data from Test Table:</h2>";
+    foreach ($data as $test) {
+        echo "ID: " . $test->id . " | Name: " . $test->name . "<br>";
+    }
+
 } catch (\Exception $e) {
     // Handle exceptions
     echo "An error occurred: " . $e->getMessage();
