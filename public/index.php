@@ -1,50 +1,50 @@
-<?php
+<!-- index.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Coffee Form</title>
+</head>
+<body>
+    <h1>Select Coffee</h1>
+    <form action="index.php" method="post">
+        <label for="coffee">Select a Coffee:</label>
+        <select id="coffee" name="coffee">
+            <?php
+            // Fetch coffee options from the database using Coffee model
+            require __DIR__.'/../vendor/autoload.php';
 
-require __DIR__.'/../vendor/autoload.php';
+            use App\Coffee;
 
-use App\Coffee;
-use App\Test;
+            $coffees = Coffee::all();
 
-// Laravel application
-$app = require_once __DIR__.'/../bootstrap/app.php';
+            // Iterate over the coffee options and create an option for each
+            foreach ($coffees as $coffee) {
+                echo "<option value='" . htmlspecialchars($coffee->id) . "'>" . htmlspecialchars($coffee->name) . "</option>";
+            }
+            ?>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
 
-// Illuminate HTTP Kernel
-$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+    <?php
+    // Process form data if the form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Retrieve selected coffee from the form
+        $selectedCoffeeId = $_POST['coffee'] ?? '';
 
-// Handle the incoming request
-$response = $kernel->handle(
-    $request = Illuminate\Http\Request::capture()
-);
+        // Fetch the selected coffee details from the database
+        $selectedCoffee = Coffee::find($selectedCoffeeId);
 
-// Display errors in development mode
-if (config('app.env') === 'local') {
-    error_reporting(E_ALL);
-    ini_set('display_errors', 'On');
-}
-
-// Your custom code
-try {
-    // Fetch data from the "coffee" table using the Coffee model
-    $coffees = Coffee::all();
-
-    // Fetch data from the "test" table using the Test model
-    $tests = Test::all();
-
-    // Display data from both models
-    echo "<h2>Data from Coffee Table:</h2>";
-    foreach ($coffees as $coffee) {
-        echo "Coffee: " . $coffee->name . " | Price: " . $coffee->price . "<br>";
+        // Display the selected coffee
+        if ($selectedCoffee) {
+            echo "<h2>Selected Coffee:</h2>";
+            echo "Coffee: " . htmlspecialchars($selectedCoffee->name);
+        } else {
+            echo "<p>No coffee selected.</p>";
+        }
     }
-
-    echo "<h2>Data from Test Table:</h2>";
-    foreach ($tests as $test) {
-        echo "ID: " . $test->id . " | Name: " . $test->name . "<br>";
-    }
-
-} catch (\Exception $e) {
-    // Handle exceptions
-    echo "An error occurred: " . $e->getMessage();
-}
-
-// Terminate the request
-$kernel->terminate($request, $response);
+    ?>
+</body>
+</html>
