@@ -2,7 +2,8 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-use App\Coffee; // Import the Coffee model
+use App\Test;
+
 // Laravel application
 $app = require_once __DIR__.'/../bootstrap/app.php';
 echo "MORANNNN";
@@ -24,12 +25,12 @@ if (config('app.env') === 'local') {
 // Your custom code
 try {
     // Example: Fetch and display data from the database using the Test model
-    $data = Coffee::all();
+    $data = Test::all();
 
     // Iterate through the collection and display the data
     echo "<h2>Data from Test Table:</h2>";
-    foreach ($data as $coffee) {
-        echo "Coffee: " . $coffee->name . " | Price: " . $coffee->price . "<br>";
+    foreach ($data as $test) {
+        echo "ID: " . $test->id . " | Name: " . $test->name . "<br>";
     }
 
 } catch (\Exception $e) {
