@@ -25,12 +25,12 @@ if (config('app.env') === 'local') {
 // Your custom code
 try {
     // Example: Fetch and display data from the database using the Test model
-    $data = Test::all();
+    $data = Coffee::all();
 
     // Iterate through the collection and display the data
     echo "<h2>Data from Test Table:</h2>";
-    foreach ($data as $test) {
-        echo "ID: " . $test->id . " | Name: " . $test->name . "<br>";
+    foreach ($data as $coffee) {
+        echo "Coffee: " . $coffee->name . " | Price: " . $coffee->price . "<br>";
     }
 
 } catch (\Exception $e) {
