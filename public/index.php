@@ -3,7 +3,7 @@
 require __DIR__.'/../vendor/autoload.php';
 
 use App\Test;
-
+use App\Coffee; // Import the Coffee model
 // Laravel application
 $app = require_once __DIR__.'/../bootstrap/app.php';
 echo "MORANNNN";
