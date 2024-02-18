@@ -2,11 +2,11 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
+use App\Coffee;
 use App\Test;
 
 // Laravel application
 $app = require_once __DIR__.'/../bootstrap/app.php';
-echo "MORANNNN";
 
 // Illuminate HTTP Kernel
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
@@ -24,12 +24,20 @@ if (config('app.env') === 'local') {
 
 // Your custom code
 try {
-    // Example: Fetch and display data from the database using the Test model
-    $data = Test::all();
+    // Fetch data from the "coffee" table using the Coffee model
+    $coffees = Coffee::all();
 
-    // Iterate through the collection and display the data
+    // Fetch data from the "test" table using the Test model
+    $tests = Test::all();
+
+    // Display data from both models
+    echo "<h2>Data from Coffee Table:</h2>";
+    foreach ($coffees as $coffee) {
+        echo "Coffee: " . $coffee->name . " | Price: " . $coffee->price . "<br>";
+    }
+
     echo "<h2>Data from Test Table:</h2>";
-    foreach ($data as $test) {
+    foreach ($tests as $test) {
         echo "ID: " . $test->id . " | Name: " . $test->name . "<br>";
     }
 
